@@ -15,7 +15,7 @@
 ``` composer require wp-content-framework/upgrade ```  
 
 ## 依存モジュール
-* [presenter](https://github.com/wp-content-framework/common)
+* [common](https://github.com/wp-content-framework/common)
 
 ## 関連モジュール
 * [mail](https://github.com/wp-content-framework/presenter)
