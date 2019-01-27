@@ -18,7 +18,7 @@
 * [common](https://github.com/wp-content-framework/common)
 
 ## 関連モジュール
-* [mail](https://github.com/wp-content-framework/presenter)
+* [presenter](https://github.com/wp-content-framework/presenter)
   * 更新情報を表示する場合に必要です。
 
 ## 基本設定
