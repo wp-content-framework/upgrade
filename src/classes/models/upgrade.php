@@ -40,7 +40,7 @@ class Upgrade implements \WP_Framework_Core\Interfaces\Loader, \WP_Framework_Pre
 	 */
 	/** @noinspection PhpUnusedPrivateMethodInspection */
 	private function upgrade() {
-		$this->app->utility->lock_process( 'upgrade', function () {
+		$this->app->lock_process( 'upgrade', function () {
 			if ( ! $this->is_required_upgrade() ) {
 				return;
 			}
