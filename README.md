@@ -16,6 +16,7 @@
 
 ## 依存モジュール
 * [common](https://github.com/wp-content-framework/common)
+* [yahnis-elsts/plugin-update-checker](https://github.com/YahnisElsts/plugin-update-checker)
 
 ## 関連モジュール
 * [presenter](https://github.com/wp-content-framework/presenter)
