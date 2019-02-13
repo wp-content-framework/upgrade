@@ -47,13 +47,14 @@ class Upgrade implements \WP_Framework_Core\Interfaces\Loader, \WP_Framework_Pre
 			$this->do_framework_action( 'start_upgrade' );
 			$last_version = $this->get_last_upgrade_version();
 			$this->set_last_upgrade_version();
-			if ( empty( $last_version ) ) {
+			$plugin_version = $this->app->get_plugin_version();
+			if ( empty( $last_version ) || version_compare( $last_version, $plugin_version, '>=' ) ) {
 				$this->do_framework_action( 'finished_upgrade' );
 
 				return;
 			}
 
-			$this->app->log( sprintf( $this->translate( 'upgrade: %s to %s' ), $last_version, $this->app->get_plugin_version() ) );
+			$this->app->log( sprintf( $this->translate( 'upgrade: %s to %s' ), $last_version, $plugin_version ) );
 
 			try {
 				$upgrades = [];
