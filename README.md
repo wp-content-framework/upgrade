@@ -15,26 +15,11 @@
 ``` composer require wp-content-framework/upgrade ```  
 
 ## 依存モジュール
-* [common](https://github.com/wp-content-framework/common)
-* [yahnis-elsts/plugin-update-checker](https://github.com/YahnisElsts/plugin-update-checker)
+* [core](https://github.com/wp-content-framework/core)
 
 ## 関連モジュール
-* [presenter](https://github.com/wp-content-framework/presenter)
-  * 更新情報を表示する場合に必要です。
-
-## 基本設定
-- configs/config.php  
-
-|設定値|説明|
-|---|---|
-|update_info_file_url|更新チェックを行うファイルのURLを設定|
-|readme_file_check_url|Upgrade Noticeを取得するreadmeファイルのURLを設定|
-
-- configs/setting.php  
-
-|設定値|説明|
-|---|---|
-|check_update|開発バージョンをチェックするかどうか|
+* [log](https://github.com/wp-content-framework/log)
+  * アップグレード履歴を保存する場合に必要です。
 
 # Author
 

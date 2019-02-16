@@ -16,14 +16,8 @@ if ( ! defined( 'WP_CONTENT_FRAMEWORK' ) ) {
 return [
 
 	'upgrade' => [
-		'${prefix}app_initialized' => [
-			'setup_settings',
-		],
 		'init'                     => [
 			'upgrade',
-		],
-		'admin_init'               => [
-			'setup_update',
 		],
 	],
 
