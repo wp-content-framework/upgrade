@@ -81,10 +81,10 @@ class Upgrade implements \WP_Framework_Core\Interfaces\Loader {
 
 				uksort( $upgrades, 'version_compare' );
 				foreach ( $upgrades as $version => $items ) {
+					$this->app->log( sprintf( $this->translate( 'upgrade process count of version %s: %d' ), $version, count( $items ) ) );
 					foreach ( $items as $item ) {
 						call_user_func( $item );
 					}
-					$this->app->log( sprintf( $this->translate( 'upgrade process count of version %s: %d' ), $version, count( $items ) ) );
 				}
 			} catch ( \Exception $e ) {
 				$this->app->log( $e );
