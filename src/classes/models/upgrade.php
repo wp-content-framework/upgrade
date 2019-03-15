@@ -53,8 +53,8 @@ class Upgrade implements \WP_Framework_Core\Interfaces\Loader {
 						if ( ! is_array( $items ) ) {
 							continue;
 						}
-						$version  = $this->app->utility->array_get( $items, 'version' );
-						$callback = $this->app->utility->array_get( $items, 'callback' );
+						$version  = $this->app->array->get( $items, 'version' );
+						$callback = $this->app->array->get( $items, 'callback' );
 						if ( ! isset( $version ) || empty( $callback ) || ! is_string( $version ) ) {
 							continue;
 						}
