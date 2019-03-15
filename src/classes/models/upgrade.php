@@ -48,7 +48,7 @@ class Upgrade implements \WP_Framework_Core\Interfaces\Loader {
 				$upgrades = [];
 				$count    = 0;
 				foreach ( $this->get_class_list() as $class ) {
-					/** @var \WP_Framework_Upgrade\Interfaces\Upgrade $class */
+					/** @var \WP_Framework_Upgrade\Interfaces\Upgrade|\WP_Framework_Core\Traits\Utility $class */
 					foreach ( $class->get_upgrade_methods() as $items ) {
 						if ( ! is_array( $items ) ) {
 							continue;
@@ -61,10 +61,10 @@ class Upgrade implements \WP_Framework_Core\Interfaces\Loader {
 						if ( version_compare( $version, $last_version, '<=' ) ) {
 							continue;
 						}
-						if ( ! is_callable( $callback ) && ( ! is_string( $callback ) || ! method_exists( $class, $callback ) || ! is_callable( [ $class, $callback ] ) ) ) {
+						if ( ! $this->is_closure( $callback ) && ! $class->is_method_callable( $callback ) ) {
 							continue;
 						}
-						$upgrades[ $version ][] = is_callable( $callback ) ? $callback : [ $class, $callback ];
+						$upgrades[ $version ][] = $this->is_closure( $callback ) ? $callback : [ $class, $callback ];
 						$count ++;
 					}
 				}
