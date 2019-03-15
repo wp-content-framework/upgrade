@@ -14,9 +14,6 @@
 
 ``` composer require wp-content-framework/upgrade ```  
 
-## 依存モジュール
-* [core](https://github.com/wp-content-framework/core)
-
 ## 関連モジュール
 * [log](https://github.com/wp-content-framework/log)
   * アップグレード履歴を保存する場合に必要です。
