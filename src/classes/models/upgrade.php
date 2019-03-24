@@ -103,6 +103,13 @@ class Upgrade implements \WP_Framework_Core\Interfaces\Loader {
 	}
 
 	/**
+	 * @return bool
+	 */
+	protected function is_common_cache_class_settings() {
+		return true;
+	}
+
+	/**
 	 * @return string
 	 */
 	protected function get_instanceof() {
