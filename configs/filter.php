@@ -13,11 +13,9 @@ if ( ! defined( 'WP_CONTENT_FRAMEWORK' ) ) {
 }
 
 return [
-
 	'upgrade' => [
-		'init'                     => [
+		'init' => [
 			'upgrade',
 		],
 	],
-
 ];

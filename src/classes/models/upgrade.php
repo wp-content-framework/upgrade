@@ -29,8 +29,9 @@ class Upgrade implements \WP_Framework_Core\Interfaces\Loader {
 
 	/**
 	 * upgrade
+	 * @noinspection PhpUnusedPrivateMethodInspection
+	 * @SuppressWarnings(PHPMD.UnusedPrivateMethod)
 	 */
-	/** @noinspection PhpUnusedPrivateMethodInspection */
 	private function upgrade() {
 		if ( ! $this->is_required_upgrade() ) {
 			return;
@@ -49,31 +50,7 @@ class Upgrade implements \WP_Framework_Core\Interfaces\Loader {
 			$this->app->log( sprintf( $this->translate( 'upgrade: %s to %s' ), $last_version, $plugin_version ) );
 
 			try {
-				$upgrades = [];
-				$count    = 0;
-				foreach ( $this->get_class_list() as $class ) {
-					/** @var \WP_Framework_Upgrade\Interfaces\Upgrade|Singleton $class */
-					foreach ( $class->get_upgrade_methods() as $items ) {
-						if ( ! is_array( $items ) ) {
-							continue;
-						}
-						$version  = $this->app->array->get( $items, 'version' );
-						$callback = $this->app->array->get( $items, 'callback' );
-						if ( ! isset( $version ) || empty( $callback ) || ! is_string( $version ) ) {
-							continue;
-						}
-						if ( version_compare( $version, $last_version, '<=' ) ) {
-							continue;
-						}
-						if ( ! $this->is_closure( $callback ) && ! $class->is_filter_callable( $callback ) ) {
-							continue;
-						}
-						$upgrades[ $version ][] = $this->is_closure( $callback ) ? $callback : function () use ( $class, $callback ) {
-							$class->filter_callback( $callback, [] );
-						};
-						$count ++;
-					}
-				}
+				list( $upgrades, $count ) = $this->get_upgrades( $last_version );
 
 				$this->app->log( sprintf( $this->translate( 'total upgrade process count: %d' ), $count ) );
 
@@ -95,6 +72,41 @@ class Upgrade implements \WP_Framework_Core\Interfaces\Loader {
 			}
 			$this->do_framework_action( 'finished_upgrade' );
 		} );
+	}
+
+	/**
+	 * @param $last_version
+	 *
+	 * @return array
+	 */
+	private function get_upgrades( $last_version ) {
+		$upgrades = [];
+		$count    = 0;
+		foreach ( $this->get_class_list() as $class ) {
+			/** @var \WP_Framework_Upgrade\Interfaces\Upgrade|Singleton $class */
+			foreach ( $class->get_upgrade_methods() as $items ) {
+				if ( ! is_array( $items ) ) {
+					continue;
+				}
+				$version  = $this->app->array->get( $items, 'version' );
+				$callback = $this->app->array->get( $items, 'callback' );
+				if ( ! isset( $version ) || empty( $callback ) || ! is_string( $version ) ) {
+					continue;
+				}
+				if ( version_compare( $version, $last_version, '<=' ) ) {
+					continue;
+				}
+				if ( ! $this->is_closure( $callback ) && ! $class->is_filter_callable( $callback ) ) {
+					continue;
+				}
+				$upgrades[ $version ][] = $this->is_closure( $callback ) ? $callback : function () use ( $class, $callback ) {
+					$class->filter_callback( $callback, [] );
+				};
+				$count++;
+			}
+		}
+
+		return [ $upgrades, $count ];
 	}
 
 	/**

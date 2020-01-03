@@ -13,7 +13,5 @@ if ( ! defined( 'WP_CONTENT_FRAMEWORK' ) ) {
 }
 
 return [
-
 	'upgrade' => '\WP_Framework_Upgrade\Classes\Models\Upgrade',
-
 ];

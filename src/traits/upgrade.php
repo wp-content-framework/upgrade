@@ -26,6 +26,6 @@ trait Upgrade {
 	 * @type callable|string $callback upgrade callback or method name
 	 * } }
 	 */
-	public abstract function get_upgrade_methods();
+	abstract public function get_upgrade_methods();
 
 }
