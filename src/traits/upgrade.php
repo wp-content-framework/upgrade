@@ -2,7 +2,6 @@
 /**
  * WP_Framework_Upgrade Traits Upgrade
  *
- * @version 0.0.1
  * @author Technote
  * @copyright Technote All Rights Reserved
  * @license http://www.opensource.org/licenses/gpl-2.0.php GNU General Public License, version 2
@@ -27,6 +26,6 @@ trait Upgrade {
 	 * @type callable|string $callback upgrade callback or method name
 	 * } }
 	 */
-	public abstract function get_upgrade_methods();
+	abstract public function get_upgrade_methods();
 
 }
